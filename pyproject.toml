@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "fastapi-crud"
+version = "0.0.1"
+description = "Stantech.ai Assessment"
+authors = ["Narayan Prajapat <narayanprajapat00099@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.116.1"
+pydantic = "^2.11.7"
+uvicorn = "^0.35.0"
+sqlalchemy = "^2.0.43"
+alembic = "^1.16.5"
+python-dotenv = "^1.1.1"
+pydantic-settings = "^2.10.1"
+asyncpg = "^0.30.0"
+greenlet = "^3.2.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
