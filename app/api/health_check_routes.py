@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from app.schemas.api_response import Response
+from app.schemas.response import Response
 from app.core.enums import ResponseMessages
 
 
