@@ -28,3 +28,6 @@ class BookService:
         deleted = await self.repo.delete(book_id)
         if not deleted:
             raise HTTPException(status_code=404, detail="Book not found")
+
+    async def book_count_by_title(self):
+        return await self.repo.book_count_by_title()
