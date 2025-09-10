@@ -1,8 +1,15 @@
+from typing import List
+from sqlalchemy import func
 from app.models.books import Book
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.constants import PER_PAGE_RECORD
-from app.schemas.books import BookCreate, BookUpdate, BookResponse
+from app.schemas.books import (
+    BookCreate,
+    BookUpdate,
+    BookResponse,
+    BookResponseByTitleCount,
+)
 
 
 class BookRepository:
@@ -21,7 +28,7 @@ class BookRepository:
         book = res.scalar_one_or_none()
         return book
 
-    async def list(self, page_no: int, last_book_id: int) -> list[BookResponse]:
+    async def list(self, page_no: int, last_book_id: int) -> List[BookResponse]:
         res = await self.db.execute(
             select(Book)
             .where(Book.id > last_book_id)
@@ -52,3 +59,10 @@ class BookRepository:
         await self.db.delete(db_book)
         await self.db.commit()
         return True
+
+    async def book_count_by_title(self) -> List[BookResponseByTitleCount]:
+        res = await self.db.execute(
+            select(Book.title, func.count().label("count")).group_by(Book.title)
+        )
+        books = res.all()
+        return [BookResponseByTitleCount.model_validate(b) for b in books]
