@@ -10,19 +10,16 @@ class BookService:
         self.repo = BookRepository(db)
 
     async def create_book(self, book: BookCreate):
-        # Example transaction logic: check uniqueness manually
-
         return await self.repo.create(book)
 
     async def get_book(self, book_id: int):
         return await self.repo.get(book_id)
 
-    async def list_books(self):
-        return await self.repo.list()
+    async def list_books(self, page_no: int, last_book_id: int):
+        return await self.repo.list(page_no, last_book_id)
 
     async def update_book(self, book_id: int, book_data: BookUpdate):
         updated = await self.repo.update(book_id, book_data)
-        print(updated, "*" * 100)
         if not updated:
             raise HTTPException(status_code=404, detail="Book not found")
         return updated
