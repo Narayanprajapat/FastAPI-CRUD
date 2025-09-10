@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 
 load_dotenv()
-
+from time import time
 from fastapi import FastAPI, Request
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
@@ -28,9 +28,10 @@ app = FastAPI(title="Stantech.ai Assessment", lifespan=lifespan)
 
 @app.middleware("http")
 async def log_middleware(request: Request, call_next):
-    logger.info(f"Accessing {request.url.path}")
+    start_time = time()
     response = await call_next(request)
-    logger.info(f"Finished {request.url.path}")
+    total_time = time() - start_time
+    logger.info(msg=f"Finished url={request.url.path} time_taken={total_time}")
     return response
 
 
