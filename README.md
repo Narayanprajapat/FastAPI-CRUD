@@ -54,13 +54,22 @@ Before you begin, ensure you have met the following requirements:
     ```
 
 5.  **Run Migrations (Optional - If using Alembic):**
+
     ```bash
+    <!-- Already setup with server as well if do not wanted to setup alembic -->
     alembic upgrade head
     alembic revision --autogenerate -m "add table" # if you modify anything in db
     alembic upgrade head # 
     ```
 
-6.  **Run the application using Docker:**
+6.  **Without Docker:**
+
+    ```bash
+    uvicorn app.server:app --reload --port 9000
+    ```
+
+
+7.  **Run the application using Docker:**
 
     ```bash
     docker build -t fastapi-crud .
