@@ -14,15 +14,17 @@ async def create_book(book: BookCreate, db: AsyncEngine = Depends(get_db)):
 
 
 @book_router.get("/", response_model=list[BookResponse])
-async def list_books(db: AsyncEngine = Depends(get_db)):
-    return await BookService(db).list_books()
+async def list_books(page_no: int = 1,last_book_id: int=0, db: AsyncEngine = Depends(get_db)):
+    return await BookService(db).list_books(page_no, last_book_id)
 
 
 @book_router.get("/{book_id}", response_model=BookResponse)
 async def get_book(book_id: int, db: AsyncEngine = Depends(get_db)):
     book = await BookService(db).get_book(book_id)
     if not book:
-        raise HTTPException(status_code=404, detail="Book not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Book not found"
+        )
     return book
 
 
