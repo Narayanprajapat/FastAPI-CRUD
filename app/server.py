@@ -17,8 +17,8 @@ logger = logging.getLogger(name="server.py")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Starting")
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    # async with engine.begin() as conn:
+    #     await conn.run_sync(Base.metadata.create_all)
     yield
     logger.info("Stopping")
 
