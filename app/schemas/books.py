@@ -23,3 +23,11 @@ class BookResponse(BookBase):
 
     class Config:
         from_attributes = True
+
+
+class BookResponseByTitleCount(BaseModel):
+    title: str
+    count: int
+
+    class Config:
+        from_attributes = True
