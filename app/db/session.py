@@ -1,5 +1,8 @@
-from app.core.config import postgresql_settings
+from dotenv import load_dotenv
 
+load_dotenv()
+
+from app.core.config import postgresql_settings
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
