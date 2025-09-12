@@ -1,6 +1,6 @@
 # FastAPI-CRUD
 
-Stantech.ai assessment
+FastAPI & PostgreSQL DB
 
 ## Key Features & Benefits
 
